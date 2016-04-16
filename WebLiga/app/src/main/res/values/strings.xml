@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WebLiga</string>
+    <string name="action_settings">Settings</string>
+    <string name="zaloguj_si">Zaloguj się</string>
+    <string name="loguj_button">Zaloguj się</string>
+    <string name="multiliga">Multiliga</string>
+</resources>
