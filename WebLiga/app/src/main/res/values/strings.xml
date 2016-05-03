@@ -5,4 +5,14 @@
     <string name="loguj_button">Zaloguj się</string>
     <string name="multiliga">Multiliga</string>
     <string name="witaj">Witaj!</string>
+    <string name="toolbarTitle">Multiliga</string>
+    <string name="zalogujToolbar">Zaloguj się</string>
+    <string name="zaloguj">Zaloguj</string>
+    <string name="zarejestrujToobar">Zarejestruj</string>
+    <string name="anulujLogowanie">Anuluj</string>
+    <string name="zarejestrujButton">Stwórz konto</string>
+    <string name="graczRegister">Gracz</string>
+    <string name="kapitanRegister">Kapitan</string>
+    <string name="sedziaRegister">Sędzia</string>
+    <string name="organizatorRegister">Organizator</string>
 </resources>

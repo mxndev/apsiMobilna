@@ -157,6 +157,9 @@ public class MainActivity extends AppCompatActivity  {
             new ExecuteLogin(localContext, userLogin, editText2.getText().toString().trim()).execute();
         }
     }
+    public void anuluj(final View view) {
+        startActivity(new Intent(MainActivity.this, MainWindowActivity.class));
+    }
 }
 
 

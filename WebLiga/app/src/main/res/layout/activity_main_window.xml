@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff"
+        app:contentInsetLeft="100dp"
+        app:contentInsetStart="100dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/zalogujToolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/zaloguj"
+        android:textColor="@color/abc_input_method_navigation_guard"
+        android:onClick="login"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zarejestrujToobar"
+        android:id="@+id/zarejestruj"
+        android:layout_alignBottom="@+id/zalogujToolbar"
+        android:layout_toLeftOf="@+id/zalogujToolbar"
+        android:layout_toStartOf="@+id/zalogujToolbar"
+        android:layout_marginTop="5dp"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:textColor="@color/abc_input_method_navigation_guard"
+        android:onClick="zarejestruj"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerToolbar"
+        android:layout_marginTop="5dp"/>
+
+
+</RelativeLayout>
