@@ -19,4 +19,9 @@
     <string name="hasloError">Hasła nie są takie same</string>
     <string name="imieError">Imię nie może być puste</string>
     <string name="nazwiskoError">Nazwisko nie może być puste</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="searchTeamTV">Wyszukaj zespół</string>
+    <string name="enterNameOfTeamTV">Wpisz nazwę zespołu lub jego część:</string>
+    <string name="SearchTeamBtn">Wyszukaj</string>
 </resources>

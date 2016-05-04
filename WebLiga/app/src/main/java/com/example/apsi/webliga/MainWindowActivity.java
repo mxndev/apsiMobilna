@@ -42,13 +42,13 @@ public class MainWindowActivity extends AppCompatActivity {
 
                         break;
                     case 1:
-                        //TODO wpisac nazwe aktywnosci od wyszukiwania ligi
-                        //startActivity(new Intent(MainWindowActivity.this, <tutaj nazwa aktywnosci>));
+
+                        startActivity(new Intent(MainWindowActivity.this, SearchLeagueActivity.class));
                         spinner.setSelection(0);
                         break;
                     case 2:
-                        //TODO wpisac nazwe aktywnosci od wyszukiwania druzyn
-                        //startActivity(new Intent(MainWindowActivity.this, <tutaj nazwa aktywnosci>));
+
+                        startActivity(new Intent(MainWindowActivity.this, SearchTeamActivity.class));
                         spinner.setSelection(0);
                         break;
                 }

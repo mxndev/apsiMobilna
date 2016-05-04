@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AfterLoginActivity" />
         <activity android:name=".GlobalActivity" />
         <activity android:name=".MainWindowActivity">
@@ -31,7 +31,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".SearchLeagueActivity" />
+        <activity android:name=".SearchTeamActivity"></activity>
     </application>
 
 </manifest>
