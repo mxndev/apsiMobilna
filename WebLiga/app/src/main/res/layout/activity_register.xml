@@ -15,7 +15,7 @@
         android:text="@string/zarejestrujButton"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="60dp"
         android:background="@color/abc_search_url_text_normal"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -33,7 +33,7 @@
         android:id="@+id/haslo"
         android:password="false"
         android:hint="Hasło"
-        android:layout_below="@+id/login"
+        android:layout_below="@+id/loginError"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -53,9 +53,10 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textPassword"
         android:id="@+id/powtorzHaslo"
         android:hint="Powtorz haslo"
-        android:layout_below="@+id/haslo"
+        android:layout_below="@+id/hasloError"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -67,7 +68,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/imie"
         android:hint="Imie"
-        android:layout_below="@+id/powtorzHaslo"
+        android:layout_below="@+id/hasloPowtorzError"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -78,7 +79,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/nazwisko"
         android:hint="Nazwisko"
-        android:layout_below="@+id/imie"
+        android:layout_below="@+id/imieError"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -115,7 +116,7 @@
         android:layout_height="wrap_content"
         android:text="@string/graczRegister"
         android:id="@+id/graczRegister"
-        android:layout_below="@+id/nazwisko"
+        android:layout_below="@+id/nazwiskoError"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -124,7 +125,7 @@
         android:layout_height="wrap_content"
         android:text="@string/kapitanRegister"
         android:id="@+id/kapitanRegister"
-        android:layout_below="@+id/nazwisko"
+        android:layout_below="@+id/nazwiskoError"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView" />
 
@@ -133,7 +134,7 @@
         android:layout_height="wrap_content"
         android:text="@string/organizatorRegister"
         android:id="@+id/organizatorRegister"
-        android:layout_below="@+id/nazwisko"
+        android:layout_below="@+id/nazwiskoError"
         android:layout_alignRight="@+id/nazwisko"
         android:layout_alignEnd="@+id/nazwisko" />
 
@@ -142,9 +143,69 @@
         android:layout_height="wrap_content"
         android:text="@string/sedziaRegister"
         android:id="@+id/sedziaRegister"
-        android:layout_below="@+id/nazwisko"
+        android:layout_below="@+id/nazwiskoError"
         android:layout_toLeftOf="@+id/organizatorRegister"
         android:layout_toStartOf="@+id/organizatorRegister" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/loginError"
+        android:id="@+id/loginError"
+        android:layout_below="@+id/login"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ff0000"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/hasloError"
+        android:id="@+id/hasloError"
+        android:layout_below="@+id/haslo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ff0000"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/hasloPowtorzError"
+        android:textColor="#ff0000"
+        android:visibility="invisible"
+        android:layout_below="@+id/powtorzHaslo"
+        android:layout_alignRight="@+id/graczRegister"
+        android:layout_alignEnd="@+id/graczRegister" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/imieError"
+        android:id="@+id/imieError"
+        android:layout_below="@+id/imie"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ff0000"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/nazwiskoError"
+        android:id="@+id/nazwiskoError"
+        android:layout_below="@+id/nazwisko"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ff0000"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -24,9 +25,13 @@ import java.io.InputStreamReader;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText login,haslo,imie,nazwisko;
+    EditText login,haslo,imie,nazwisko,hasloPowtorz;
     CheckBox graczRegister,kapitanRegister,organizatorRegister,sedziaRegister;
-    String gracz=null,kapitan=null,organizator=null,sedzia=null,admin=null;
+    String gracz=null,kapitan=null,organizator=null,sedzia=null;
+    TextView loginError,hasloError,imieError,nazwiskoError;
+    boolean prawidlowy=true;
+    String response = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +40,17 @@ public class RegisterActivity extends AppCompatActivity {
         //referencje do obiektow
         login = (EditText) findViewById(R.id.login);
         haslo = (EditText) findViewById(R.id.haslo);
+        hasloPowtorz = (EditText) findViewById(R.id.powtorzHaslo);
         imie = (EditText) findViewById(R.id.imie);
         nazwisko = (EditText) findViewById(R.id.nazwisko);
         graczRegister = (CheckBox) findViewById(R.id.graczRegister);
         kapitanRegister = (CheckBox) findViewById(R.id.kapitanRegister);
         organizatorRegister = (CheckBox) findViewById(R.id.organizatorRegister);
         sedziaRegister = (CheckBox) findViewById(R.id.sedziaRegister);
+        loginError = (TextView) findViewById(R.id.loginError);
+        hasloError = (TextView) findViewById(R.id.hasloError);
+        imieError = (TextView) findViewById(R.id.imieError);
+        nazwiskoError = (TextView) findViewById(R.id.nazwiskoError);
     }
 
     public void anuluj(final View view) {
@@ -48,13 +58,17 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void zarejestruj(final View view) {
-        new HttpAsyncTask().execute("http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/createUser");
-        startActivity(new Intent(RegisterActivity.this, MainWindowActivity.class));
+        this.validate();
+        if(prawidlowy==true){
+            new HttpAsyncTask().execute("http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/createUser");
+            startActivity(new Intent(RegisterActivity.this, MainWindowActivity.class));
+        }
+        prawidlowy=true;
     }
 
     public String POST(String url){
         InputStream inputStream = null;
-        String result = "";
+
         try {
             // 1. create HttpClient
             HttpClient httpclient = new DefaultHttpClient();
@@ -115,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // 7. Set some headers to inform server about the type of the content
            // httpPost.setHeader("Accept", "application/json");
-           // httpPost.setHeader("Content-type", "application/json");
+           httpPost.setHeader("Content-type", "application/json");
 
             // 8. Execute POST request to the given URL
             HttpResponse httpResponse = httpclient.execute(httpPost);
@@ -125,16 +139,16 @@ public class RegisterActivity extends AppCompatActivity {
 
             // 10. convert inputstream to string
             if(inputStream != null)
-                result = convertInputStreamToString(inputStream);
+                response = convertInputStreamToString(inputStream);
             else
-                result = "Did not work!";
+                response = "Did not work!";
 
         } catch (Exception e) {
             Log.d("InputStream", e.getLocalizedMessage());
         }
 
         // 11. return result
-        return result;
+        return response;
     }
 
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
@@ -147,8 +161,10 @@ public class RegisterActivity extends AppCompatActivity {
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
-            Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+            if(response.equals("{\"description\":\"Pomyślnie zapisano użytkownika. \",\"status\":\"OK\"}" ))
+            Toast.makeText(getBaseContext(), "Konto utworzone!", Toast.LENGTH_LONG).show();
+            else
+            Toast.makeText(getBaseContext(), "Nie udalo się utworzyć konta!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -161,6 +177,48 @@ public class RegisterActivity extends AppCompatActivity {
 
         inputStream.close();
         return result;
+
+    }
+
+    private void validate()
+    {
+
+        if(login.getText().toString().trim().equals("")){
+
+
+            loginError.setVisibility(View.VISIBLE);
+            prawidlowy=false;
+        }
+        else{
+            loginError.setVisibility(View.INVISIBLE);
+        }
+        String haselko = haslo.getText().toString().trim();
+        String powtorka = hasloPowtorz.getText().toString().trim();
+        if(haselko.equals(powtorka) ){
+
+
+            hasloError.setVisibility(View.INVISIBLE);
+        }
+        else{
+            hasloError.setVisibility(View.VISIBLE);
+            prawidlowy=false;
+        }
+        if(imie.getText().toString().trim().equals("")){
+
+            imieError.setVisibility(View.VISIBLE);
+            prawidlowy=false;
+        }
+        else{
+            imieError.setVisibility(View.GONE);
+        }
+        if(nazwisko.getText().toString().trim().equals("")){
+
+            nazwiskoError.setVisibility(View.VISIBLE);
+            prawidlowy=false;
+        }
+        else{
+            nazwiskoError.setVisibility(View.GONE);
+        }
 
     }
 }
