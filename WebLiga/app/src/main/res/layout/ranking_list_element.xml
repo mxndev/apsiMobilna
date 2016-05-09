@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/winSetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Wygrane sety:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/winSetLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="set"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/lostSetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/winSetLabel"
+        android:text="Przegrane sety:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/lostSetLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/winSetLabelTV"
+        android:text="set"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/scoresWonLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/lostSetLabel"
+        android:text="Wszystkie wygrane mecze:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/scoresWonLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/lostSetLabelTV"
+        android:text="win"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/scoresLostLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/scoresWonLabel"
+        android:text="Wszystkie przegrane mecze:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/scoresLostLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/scoresWonLabelTV"
+        android:text="lost"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/pointsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/scoresLostLabel"
+        android:text="Punkty:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/pointsLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/scoresLostLabelTV"
+        android:text="points"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/teamLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/pointsLabel"
+        android:text="Zespół:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/teamLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/pointsLabelTV"
+        android:text="team"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+</RelativeLayout>

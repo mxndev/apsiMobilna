@@ -1,6 +1,7 @@
 package com.example.apsi.webliga;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -12,11 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.content.*;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -44,6 +48,18 @@ public class SearchLeagueActivity extends AppCompatActivity {
         clickButton(button);
         EditText editText = (EditText) findViewById(R.id.leagueNameET);
         addListenerToEditText(button, editText);
+        OnItemClickListener listener = new OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Object o = listView.getItemAtPosition(position);
+                SearchLeagueListElement obj_itemDetails = (SearchLeagueListElement)o;
+                Intent intent = new Intent(SearchLeagueActivity.this, GroupActivity.class);
+                intent.putExtra("ID", obj_itemDetails.getLeagueID());
+                startActivity(intent);
+            }
+        };
+        listView.setOnItemClickListener(listener);
     }
 
     private void addListenerToEditText(final Button button, EditText editText) {
@@ -184,6 +200,7 @@ class SearchLeagueAdapter extends ArrayAdapter<SearchLeagueListElement> {
             holder.organizer.setText(listOfElements.get(position).getOrganizer());
             holder.sportName.setText(listOfElements.get(position).getSportName());
         } catch (Exception e) { }
+
         return vi;
     }
 }
