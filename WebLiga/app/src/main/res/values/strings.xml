@@ -24,4 +24,10 @@
     <string name="searchTeamTV">Wyszukaj zespół</string>
     <string name="enterNameOfTeamTV">Wpisz nazwę zespołu lub jego część:</string>
     <string name="SearchTeamBtn">Wyszukaj</string>
+    <string name="mojeMeczeTitle">Moje mecze</string>
+    <string name="sędziaMojeMecze">Sędzia</string>
+    <string name="kapitanMojeMecze">Kapitan</string>
+    <string name="graczMojeMecze">Gracz</string>
+    <string name="orgarnizatorMojeMecze">Orgarnizator</string>
+    <string name="wylogujToolbar">Wyloguj</string>
 </resources>
