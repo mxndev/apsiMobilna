@@ -8,6 +8,8 @@ public class GlobalActivity extends Application {
 
     private HttpContext localContext;
     private String userLogin,isReferee,isCapitan,isPlayer,isOrganizer;
+    private int userID;
+    private int refereeID;
 
     public HttpContext getLocalContext(){
         return localContext;
@@ -49,6 +51,20 @@ public class GlobalActivity extends Application {
     }
     public void setIsOrganizer(String aisOrganizer){
         this.isOrganizer=aisOrganizer;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setRefereeID(int refereeID) {
+        this.refereeID = refereeID;
+    }
+    public int getRefereeID() {
+        return refereeID;
     }
 
 }

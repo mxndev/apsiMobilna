@@ -131,8 +131,8 @@ public class MainActivity extends AppCompatActivity  {
                     builder.setMessage("Błędne dane logowania!")
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface arg0, int arg1) {
-                                    EditText editText = (EditText) findViewById(id.editText);
-                                    EditText editText2 = (EditText) findViewById(id.editText2);
+                                    EditText editText = (EditText) findViewById(id.loginLoguj);
+                                    EditText editText2 = (EditText) findViewById(id.hasloLoguj);
                                     if (editText != null) {
                                         editText.setText("");
                                     }
@@ -147,14 +147,15 @@ public class MainActivity extends AppCompatActivity  {
             }
         }
 
-        EditText editText = (EditText) findViewById(id.editText);
+        EditText editText = (EditText) findViewById(id.hasloLoguj);
         if (editText != null) {
-            userLogin = editText.getText().toString().trim();
+
         }
-        EditText editText2 = (EditText) findViewById(id.editText2);
+        EditText editText2 = (EditText) findViewById(id.loginLoguj);
 
         if (editText2 != null) {
-            new ExecuteLogin(localContext, userLogin, editText2.getText().toString().trim()).execute();
+            userLogin = editText2.getText().toString().trim();
+            new ExecuteLogin(localContext, userLogin, editText.getText().toString().trim()).execute();
         }
     }
     public void anuluj(final View view) {

@@ -35,6 +35,7 @@ public class GroupActivity extends AppCompatActivity {
     ListView listView;
     GroupAdapter groupAdapter;
     private ArrayList<GroupListElement> groupListElements;
+    ArrayList<Integer> leaguesReferee = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class GroupActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Object o = listView.getItemAtPosition(position);
-                GroupListElement obj_itemDetails = (GroupListElement)o;
+                GroupListElement obj_itemDetails = (GroupListElement) o;
                 Intent intent = new Intent(GroupActivity.this, RankingActivity.class);
                 intent.putExtra("ID", obj_itemDetails.getGroupID());
                 startActivity(intent);
@@ -86,7 +87,7 @@ public class GroupActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onPostExecute(String result){
+            protected void onPostExecute(String result) {
                 JSONArray jsonArray;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     try {
@@ -119,6 +120,65 @@ public class GroupActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int groupId = intent.getIntExtra("ID", 0);
         new GroupExecute(groupId).execute();
+
+        this.pobranieLigSedziego();
+
+    }
+
+    public void pobranieLigSedziego() {
+        class RefereeLeaguesExecute extends AsyncTask<Void, Void, String> {
+            private int refereeID;
+            private final String urlToGetLeagueByName =
+                    "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/referee/getLeagues?id=";
+
+            public RefereeLeaguesExecute(int refereeID_) {
+                refereeID = refereeID_;
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String ret;
+                try {
+                    HttpClient client = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(String.format("%s%d", urlToGetLeagueByName, refereeID));
+                    HttpResponse response = client.execute(request);
+                    BufferedReader rd = new BufferedReader(
+                            new InputStreamReader(response.getEntity().getContent()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = rd.readLine()) != null) {
+                        result.append(line);
+                    }
+                    ret = result.toString();
+                } catch (Exception e) {
+                    return e.toString();
+                }
+                return ret;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                JSONArray jsonArray;
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    try {
+                        jsonArray = new JSONArray(result);
+                        int i = 0;
+                        while (i < jsonArray.length()) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            Integer id = jsonObject.getInt("id");
+                            leaguesReferee.add(id);
+                            i++;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        new RefereeLeaguesExecute(globalActivity.getRefereeID()).execute();
     }
 }
 
