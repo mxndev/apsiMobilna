@@ -1,9 +1,5 @@
 package com.example.apsi.webliga;
 
-/**
- * Created by xx on 2016-05-07.
- */
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,13 +12,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HttpContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +39,7 @@ public class GroupActivity extends AppCompatActivity {
     GroupAdapter groupAdapter;
     private ArrayList<GroupListElement> groupListElements;
     ArrayList<Integer> leaguesReferee = new ArrayList<>();
+    int groupId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,10 +122,14 @@ public class GroupActivity extends AppCompatActivity {
             }
         }
         Intent intent = getIntent();
-        int groupId = intent.getIntExtra("ID", 0);
+        groupId = intent.getIntExtra("ID", 0);
         new GroupExecute(groupId).execute();
 
-        this.pobranieLigSedziego();
+        //wywolanie jsona do sprawdzenia czy dla istniejacego sedziego liga juz jest na jego liscie
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        if (globalActivity.getIsReferee().equals("Y")) {
+            this.pobranieLigSedziego();
+        }
 
     }
 
@@ -160,25 +168,87 @@ public class GroupActivity extends AppCompatActivity {
             protected void onPostExecute(String result) {
                 JSONArray jsonArray;
 
+
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
                     try {
                         jsonArray = new JSONArray(result);
                         int i = 0;
                         while (i < jsonArray.length()) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Integer id = jsonObject.getInt("id");
+                            int id = jsonObject.getInt("id");
                             leaguesReferee.add(id);
                             i++;
+                            //sprawdza czy na liscie lig sedziego jest aktualnie otwarta liga
+                            if (id == groupId) {
+                                Button dodajdoLigiSedzia = (Button) findViewById(R.id.dodajdoLigiSedzia);
+                                //przycisk od sedziego staje sie widoczny
+                                if (dodajdoLigiSedzia != null) {
+                                    dodajdoLigiSedzia.setVisibility(View.GONE);
+                                }
+                            }
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+
             }
 
         }
         final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
         new RefereeLeaguesExecute(globalActivity.getRefereeID()).execute();
+    }
+
+    public void dodajdoLigiSedzia(final View view) {
+
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        final HttpContext localContext = globalActivity.getLocalContext();
+        class signToLeagueReferee extends AsyncTask<Void, Void, String> {
+            private int leagueID;
+            private final String urlToGetLeagueByName =
+                    "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/referee/signToLeague";
+
+            public signToLeagueReferee(int leagueID_) {
+                leagueID = leagueID_;
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String ret;
+                try {
+                    HttpClient client = new DefaultHttpClient();
+                    HttpPost request = new HttpPost(urlToGetLeagueByName);
+
+                    ArrayList<NameValuePair> pairs = new ArrayList<>();
+                    pairs.add(new BasicNameValuePair("leagueId", Integer.toString(leagueID)));
+                    request.setEntity(new UrlEncodedFormEntity(pairs));
+                    HttpResponse response = client.execute(request,localContext);
+                    BufferedReader rd = new BufferedReader(
+                            new InputStreamReader(response.getEntity().getContent()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = rd.readLine()) != null) {result.append(line);
+                    }
+                    ret = result.toString();
+                } catch (Exception e) {
+                    return e.toString();
+                }
+                return ret;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if (result.equals("{\"description\":\"Pomyślnie zapisano wniosek o przypisanie sędziego do ligi. \",\"status\":\"OK\"}")){
+                    Toast.makeText(getBaseContext(), "Dodano sędziego!", Toast.LENGTH_LONG).show();
+                    Button dodajdoLigiSedzia = (Button) findViewById(R.id.dodajdoLigiSedzia);
+                    dodajdoLigiSedzia.setVisibility(View.INVISIBLE);
+                }
+                else
+                    Toast.makeText(getBaseContext(), "Nie udalo się dodać sędziego!", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        new signToLeagueReferee(groupId).execute();
     }
 }
 
@@ -186,20 +256,25 @@ class GroupAdapter extends ArrayAdapter<GroupListElement> {
     private ArrayList<GroupListElement> listOfElements;
     private static LayoutInflater inflater = null;
 
-    public GroupAdapter (Activity activity, int textViewResourceId, ArrayList<GroupListElement> element) {
+    public GroupAdapter(Activity activity, int textViewResourceId, ArrayList<GroupListElement> element) {
         super(activity, textViewResourceId, element);
         try {
             this.listOfElements = element;
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @Override
-    public int getCount() { return listOfElements.size(); }
+    public int getCount() {
+        return listOfElements.size();
+    }
 
     @Override
-    public long getItemId(int position) { return position; }
+    public long getItemId(int position) {
+        return position;
+    }
 
     public static class ViewHolder {
         public TextView matches;
@@ -229,7 +304,9 @@ class GroupAdapter extends ArrayAdapter<GroupListElement> {
             holder.teamPlayers.setText(listOfElements.get(position).getTeamPlayers());
             holder.promotions.setText(listOfElements.get(position).getPromotions());
             holder.phase.setText(listOfElements.get(position).getPhase());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return vi;
     }
@@ -246,9 +323,24 @@ class GroupListElement {
         phase = phase_;
         groupID = groupID_;
     }
-    public String getMatches() { return matches; }
-    public String getTeamPlayers() { return teamPlayers; }
-    public String getPromotions() { return promotions; }
-    public String getPhase() { return phase; }
-    public int getGroupID() { return groupID; }
+
+    public String getMatches() {
+        return matches;
+    }
+
+    public String getTeamPlayers() {
+        return teamPlayers;
+    }
+
+    public String getPromotions() {
+        return promotions;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
+    public int getGroupID() {
+        return groupID;
+    }
 }
