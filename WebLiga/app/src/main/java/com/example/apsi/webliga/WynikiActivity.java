@@ -90,6 +90,7 @@ public class WynikiActivity extends AppCompatActivity {
                 ArrayList<WynikiListElement> groupListElements = new ArrayList<>();
                 while (i < jsonArray.length()) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    int id = jsonObject.getInt("id");
                     if(jsonObject.getJSONObject("league").getJSONObject("sport").getString("type").equals("team"))
                     {
                         String date = jsonObject.getString("date");
@@ -102,7 +103,7 @@ public class WynikiActivity extends AppCompatActivity {
                             JSONObject teamObject2 = array.getJSONObject(1);
                             String score2 = teamObject2.getString("score");
                             String team2 = teamObject2.getJSONObject("pk").getJSONObject("team").getString("name");
-                            groupListElements.add(new WynikiListElement(date, team1, score1, team2, score2));
+                            groupListElements.add(new WynikiListElement(id, date, team1, score1, team2, score2));
                         }
                     } else {
                         String date = jsonObject.getString("date");
@@ -115,7 +116,7 @@ public class WynikiActivity extends AppCompatActivity {
                             JSONObject teamObject2 = array.getJSONObject(1);
                             String score2 = teamObject2.getString("score");
                             String team2 = teamObject2.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("name") + " " + teamObject2.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("surname");
-                            groupListElements.add(new WynikiListElement(date, team1, score1, team2, score2));
+                            groupListElements.add(new WynikiListElement(id, date, team1, score1, team2, score2));
                         }
                     }
                     i++;
@@ -186,8 +187,10 @@ class WynikiAdapter extends ArrayAdapter<WynikiListElement> {
 
 class WynikiListElement {
     private String date, team1, score1, team2, score2;
+    int id;
 
-    public WynikiListElement(String date_, String team1_, String score1_, String team2_, String score2_) {
+    public WynikiListElement(int id_, String date_, String team1_, String score1_, String team2_, String score2_) {
+        id = id_;
         date = date_;
         team1 = team1_;
         score1 = score1_;
@@ -199,4 +202,5 @@ class WynikiListElement {
     public String getScore1() { return score1; }
     public String getTeam2() { return team2; }
     public String getScore2() { return score2; }
+    public int getId() { return id; }
 }

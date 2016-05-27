@@ -2,11 +2,9 @@ package com.example.apsi.webliga;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -46,6 +44,19 @@ public class MojeMeczeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_moje_mecze);
         initToolBar();
         listView = (ListView) findViewById(R.id.listaMeczySedzia);
+
+        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Object o = listView.getItemAtPosition(position);
+                WynikiListElement obj_itemDetails = (WynikiListElement)o;
+                Intent intent = new Intent(MojeMeczeActivity.this, ChangeResultsActivity.class);
+                intent.putExtra("ID", obj_itemDetails.getId());
+                startActivity(intent);
+            }
+        };
+        listView.setOnItemClickListener(listener);
 
         //do sprawdzenia jakiego typu jest użytkownik
         final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
@@ -212,30 +223,27 @@ public class MojeMeczeActivity extends AppCompatActivity {
                 ArrayList<WynikiListElement> groupListElements = new ArrayList<>();
                 while (i < jsonArray.length()) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    if (jsonObject.getJSONObject("league").getJSONObject("sport").getString("type").equals("team")) {
-                        String date = jsonObject.getString("date");
-                        JSONArray array = jsonObject.getJSONArray("scoreTeam");
-                        if (array.length() > 0) {
-                            JSONObject teamObject1 = array.getJSONObject(0);
-                            String score1 = teamObject1.getString("score");
-                            String team1 = teamObject1.getJSONObject("pk").getJSONObject("team").getString("name");
-                            JSONObject teamObject2 = array.getJSONObject(1);
-                            String score2 = teamObject2.getString("score");
-                            String team2 = teamObject2.getJSONObject("pk").getJSONObject("team").getString("name");
-                            groupListElements.add(new WynikiListElement(date, team1, score1, team2, score2));
-                        }
-                    } else {
-                        String date = jsonObject.getString("date");
-                        JSONArray array = jsonObject.getJSONArray("scoreInd");
-                        if (array.length() > 0) {
-                            JSONObject teamObject1 = array.getJSONObject(0);
-                            String score1 = teamObject1.getString("score");
-                            String team1 = teamObject1.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("name") + " " + teamObject1.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("surname");
-                            JSONObject teamObject2 = array.getJSONObject(1);
-                            String score2 = teamObject2.getString("score");
-                            String team2 = teamObject2.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("name") + " " + teamObject2.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("surname");
-                            groupListElements.add(new WynikiListElement(date, team1, score1, team2, score2));
-                        }
+                    int id = jsonObject.getInt("id");
+                    JSONArray teamArray = jsonObject.getJSONArray("scoreTeam");
+                    JSONArray indArray = jsonObject.getJSONArray("scoreInd");
+                    String date = jsonObject.getString("date");
+                    if (teamArray.length() > 1) {
+                        JSONObject teamObject1 = teamArray.getJSONObject(0);
+                        String score1 = teamObject1.getString("score");
+                        String team1 = teamObject1.getJSONObject("pk").getJSONObject("team").getString("name");
+                        JSONObject teamObject2 = teamArray.getJSONObject(1);
+                        String score2 = teamObject2.getString("score");
+                        String team2 = teamObject2.getJSONObject("pk").getJSONObject("team").getString("name");
+                        groupListElements.add(new WynikiListElement(id, date, team1, score1, team2, score2));
+                    }
+                    if (indArray.length() > 1) {
+                        JSONObject teamObject1 = indArray.getJSONObject(0);
+                        String score1 = teamObject1.getString("score");
+                        String team1 = teamObject1.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("name") + " " + teamObject1.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("surname");
+                        JSONObject teamObject2 = indArray.getJSONObject(1);
+                        String score2 = teamObject2.getString("score");
+                        String team2 = teamObject2.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("name") + " " + teamObject2.getJSONObject("pk").getJSONObject("player").getJSONObject("user").getString("surname");
+                        groupListElements.add(new WynikiListElement(id, date, team1, score1, team2, score2));
                     }
                     i++;
                 }
