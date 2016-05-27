@@ -30,4 +30,6 @@
     <string name="graczMojeMecze">Gracz</string>
     <string name="orgarnizatorMojeMecze">Orgarnizator</string>
     <string name="wylogujToolbar">Wyloguj</string>
+    <string name="title_activity_change_results">ChangeResultsActivity</string>
+    <string name="changeResultsTitle">Wprowadź wynik</string>
 </resources>

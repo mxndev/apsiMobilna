@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff"
+        app:contentInsetLeft="100dp"
+        app:contentInsetStart="100dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerToolbar2"
+        android:layout_marginTop="5dp"/>
+
+    <Button
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wylogujToolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/wylogujToolbar"
+        android:textColor="@color/abc_input_method_navigation_guard"
+        android:onClick="wyloguj"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/changeResultsTitle"
+        android:id="@+id/changeResultsTitleTV"
+        android:textSize="30dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="first name"
+        android:id="@+id/firstNameTV"
+        android:textSize="28sp"
+        android:layout_below="@+id/changeResultsTitleTV"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:maxEms="2"
+        android:id="@+id/firstScore"
+        android:singleLine="true"
+        android:textSize="28sp"
+        android:layout_below="@+id/changeResultsTitleTV"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/firstNameTV"
+        android:layout_marginRight="8dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="second name"
+        android:id="@+id/secondNameTV"
+        android:textSize="28sp"
+        android:layout_below="@+id/firstNameTV"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:maxEms="2"
+        android:id="@+id/secondScore"
+        android:singleLine="true"
+        android:textSize="28sp"
+        android:layout_below="@+id/firstScore"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/secondNameTV"
+        android:layout_marginRight="8dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zatwierdź zmiany"
+        android:id="@+id/confirmChangesBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="confirmChanges"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Wyniki setów:"
+        android:id="@+id/setsTV"
+        android:textSize="30dp"
+        android:layout_below="@+id/secondNameTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodaj set"
+        android:id="@+id/addSetBtn"
+        android:layout_toRightOf="@+id/confirmChangesBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:onClick="addSet"/>
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/partOfGameList"
+        android:layout_below="@+id/setsTV"
+        android:layout_above="@+id/addSetBtn"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>
