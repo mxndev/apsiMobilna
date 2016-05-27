@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/setLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:textSize="22sp"/>
+
+    <TextView
+        android:id="@+id/elemFirstTeamNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_toLeftOf="@+id/firstTeamScore"
+        android:layout_alignParentTop="true"
+        android:text=""
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/elemSecondTeamNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/secondTeamScore"
+        android:text=""
+        android:layout_marginBottom="5dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:maxEms="2"
+        android:id="@+id/firstTeamScore"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/elemFirstTeamNameTV"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="8dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:maxEms="2"
+        android:id="@+id/secondTeamScore"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/elemSecondTeamNameTV"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="8dp"/>
+
+</RelativeLayout>
