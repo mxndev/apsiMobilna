@@ -235,11 +235,7 @@ public class TeamActivity extends AppCompatActivity {
                 JSONObject jsonResult = null;
                 try {
                     jsonResult = new JSONObject(result);
-                    if (jsonResult.getString("status").equals("OK")){
-                        Toast.makeText(getBaseContext(), jsonResult.getString("description"), Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getBaseContext(), jsonResult.getString("description"), Toast.LENGTH_LONG).show();
-                    }
+                    Toast.makeText(getBaseContext(), jsonResult.getString("description"), Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
