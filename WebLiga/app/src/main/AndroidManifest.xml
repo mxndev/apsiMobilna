@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.apsi.webliga">
+    package="com.example.apsi.webliga" >
 
     <uses-sdk
         android:minSdkVersion="7"
@@ -18,13 +18,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AfterLoginActivity" />
         <activity android:name=".GlobalActivity" />
-        <activity android:name=".MainWindowActivity">
+        <activity android:name=".MainWindowActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".MojeMeczeActivity"></activity>
+        <activity android:name=".MojeMeczeActivity" />
     </application>
 
 </manifest>

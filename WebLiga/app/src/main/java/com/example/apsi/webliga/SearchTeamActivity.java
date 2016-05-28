@@ -3,6 +3,7 @@ package com.example.apsi.webliga;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -63,6 +65,17 @@ public class SearchTeamActivity extends AppCompatActivity {
                 }
             });
         }
+        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Object o = listView.getItemAtPosition(position);
+                SearchTeamListElement obj_itemDetails = (SearchTeamListElement)o;
+                Intent intent = new Intent(SearchTeamActivity.this, TeamActivity.class);
+                intent.putExtra("ID", obj_itemDetails.getTeamID());
+                startActivity(intent);
+            }
+        };
+        listView.setOnItemClickListener(listener);
     }
 
     public void searchTeam(View view) {
