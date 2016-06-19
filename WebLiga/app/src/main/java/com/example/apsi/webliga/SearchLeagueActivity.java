@@ -1,8 +1,8 @@
 package com.example.apsi.webliga;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.content.*;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -54,8 +53,12 @@ public class SearchLeagueActivity extends AppCompatActivity {
                                     long id) {
                 Object o = listView.getItemAtPosition(position);
                 SearchLeagueListElement obj_itemDetails = (SearchLeagueListElement)o;
-                Intent intent = new Intent(SearchLeagueActivity.this, GroupActivity.class);
+                Intent intent = new Intent(SearchLeagueActivity.this, LeagueDetailsActivity.class);
                 intent.putExtra("ID", obj_itemDetails.getLeagueID());
+                intent.putExtra("name", obj_itemDetails.getLeagueName());
+                intent.putExtra("sport", obj_itemDetails.getSportName());
+                intent.putExtra("organizer", obj_itemDetails.getOrganizerName());
+                intent.putExtra("sportsType", obj_itemDetails.getSportsType());
                 startActivity(intent);
             }
         };
@@ -136,9 +139,11 @@ public class SearchLeagueActivity extends AppCompatActivity {
                     int leagueID = jsonObject.getInt("id");
                     String organizerName = jsonObject.getJSONObject("organizer").getJSONObject("user").getString("name") +
                             " " + jsonObject.getJSONObject("organizer").getJSONObject("user").getString("surname");
+                    String sportsType = jsonObject.getJSONObject("sport").getString("type");
                     String leagueName = jsonObject.getString("name");
                     String sportName = jsonObject.getJSONObject("sport").getString("name");
-                    searchLeagueListElements.add(new SearchLeagueListElement(leagueName,organizerName,sportName, leagueID));
+                    searchLeagueListElements.add(new SearchLeagueListElement(leagueName,sportName,
+                            leagueID, organizerName, sportsType));
                     i++;
                 }
                 return searchLeagueListElements;
@@ -177,7 +182,6 @@ class SearchLeagueAdapter extends ArrayAdapter<SearchLeagueListElement> {
     public static class ViewHolder {
         public TextView leagueName;
         public TextView sportName;
-        public TextView organizer;
     }
 
     @Override
@@ -190,14 +194,12 @@ class SearchLeagueAdapter extends ArrayAdapter<SearchLeagueListElement> {
                 holder = new ViewHolder();
                 holder.leagueName = (TextView) vi.findViewById(R.id.leagueNameTV);
                 holder.sportName = (TextView) vi.findViewById(R.id.sportNameTV);
-                holder.organizer = (TextView) vi.findViewById(R.id.organizerTV);
                 vi.setTag(holder);
             } else {
                 holder = (ViewHolder) vi.getTag();
             }
             holder.leagueName.setText(listOfElements.get(position).getLeagueName());
             holder.leagueName.setTag(listOfElements.get(position).getLeagueID());
-            holder.organizer.setText(listOfElements.get(position).getOrganizer());
             holder.sportName.setText(listOfElements.get(position).getSportName());
         } catch (Exception e) { }
 
@@ -206,17 +208,19 @@ class SearchLeagueAdapter extends ArrayAdapter<SearchLeagueListElement> {
 }
 
 class SearchLeagueListElement {
-    private String leagueName, organizer, sportName;
+    private String leagueName, sportName, organizerName, sportsType;
     private int leagueID;
 
-    public SearchLeagueListElement(String leagueName_, String organizer_, String sportName_, int leagueID_) {
+    public SearchLeagueListElement(String leagueName_, String sportName_, int leagueID_, String organizerName_, String sportsType_) {
         leagueName = leagueName_;
-        organizer = organizer_;
         sportName = sportName_;
         leagueID = leagueID_;
+        organizerName = organizerName_;
+        sportsType = sportsType_;
     }
     public String getLeagueName() { return leagueName; }
-    public String getOrganizer() { return organizer; }
     public String getSportName() { return sportName; }
+    public String getOrganizerName() { return organizerName; }
     public int getLeagueID() { return leagueID; }
+    public String getSportsType() { return sportsType; }
 }

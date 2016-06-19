@@ -5,16 +5,16 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/leagueNameLabelTV"
+        android:id="@+id/dateMNLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Nazwa ligi:"
+        android:text="Data:"
         android:textSize="@dimen/search_league_list_element_text_size"/>
 
     <TextView
-        android:id="@+id/leagueNameTV"
+        android:id="@+id/dateMN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -25,22 +25,22 @@
         android:textSize="@dimen/search_league_list_element_text_size"/>
 
     <TextView
-        android:id="@+id/sportNameLabelTV"
+        android:id="@+id/placeMNLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/leagueNameLabelTV"
-        android:text="Dyscyplina:"
+        android:layout_below="@id/dateMNLabel"
+        android:text="Wynik:"
         android:textSize="@dimen/search_league_list_element_text_size"/>
 
     <TextView
-        android:id="@+id/sportNameTV"
+        android:id="@+id/placeMN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="15dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/leagueNameTV"
+        android:layout_below="@id/dateMN"
         android:text="sportname"
         android:textSize="@dimen/search_league_list_element_text_size"/>
 </RelativeLayout>
