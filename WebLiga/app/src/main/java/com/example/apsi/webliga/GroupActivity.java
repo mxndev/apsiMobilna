@@ -127,7 +127,7 @@ public class GroupActivity extends AppCompatActivity {
 
         //wywolanie jsona do sprawdzenia czy dla istniejacego sedziego liga juz jest na jego liscie
         final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
-        if (globalActivity.getIsReferee().equals("Y")) {
+        if (globalActivity.getIsReferee() != null && globalActivity.getIsReferee().equals("Y")) {
             this.pobranieLigSedziego();
             Button dodajdoLigiSedzia = (Button) findViewById(R.id.dodajdoLigiSedzia);
             //przycisk od sedziego staje sie widoczny

@@ -71,10 +71,12 @@ public class LeagueDetailsActivity extends AppCompatActivity {
         leagueId = intent.getIntExtra("ID", 0);
         Button signIndToLeagueBtn = (Button) findViewById(R.id.signIndToLeagueBtn);
         Button signTeamToLeagueBtn = (Button) findViewById(R.id.signTeamToLeagueBtn);
-        if (intent.getStringExtra("sportsType").equals(INDIVIDUAL_SPORT))
-            signIndToLeagueBtn.setVisibility(Button.VISIBLE);
-        else if (intent.getStringExtra("sportsType").equals(TEAM_SPORT))
-            signTeamToLeagueBtn.setVisibility(Button.VISIBLE);
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        if (globalActivity.getLocalContext() != null)
+            if (intent.getStringExtra("sportsType").equals(INDIVIDUAL_SPORT))
+                signIndToLeagueBtn.setVisibility(Button.VISIBLE);
+            else if (intent.getStringExtra("sportsType").equals(TEAM_SPORT))
+                signTeamToLeagueBtn.setVisibility(Button.VISIBLE);
         new LeagueDetailsExecute(leagueId).execute();
     }
 
