@@ -54,7 +54,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void anuluj(final View view) {
-        startActivity(new Intent(RegisterActivity.this, MainWindowActivity.class));
+       // startActivity(new Intent(RegisterActivity.this, MainWindowActivity.class));
+        this.finish();
     }
 
     public void zarejestruj(final View view) {

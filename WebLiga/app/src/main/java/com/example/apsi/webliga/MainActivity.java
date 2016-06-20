@@ -159,7 +159,8 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
     public void anuluj(final View view) {
-        startActivity(new Intent(MainActivity.this, MainWindowActivity.class));
+        //startActivity(new Intent(MainActivity.this, MainWindowActivity.class));
+        this.finish();
     }
 }
 

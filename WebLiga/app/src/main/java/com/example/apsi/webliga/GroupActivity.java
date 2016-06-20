@@ -129,6 +129,11 @@ public class GroupActivity extends AppCompatActivity {
         final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
         if (globalActivity.getIsReferee().equals("Y")) {
             this.pobranieLigSedziego();
+            Button dodajdoLigiSedzia = (Button) findViewById(R.id.dodajdoLigiSedzia);
+            //przycisk od sedziego staje sie widoczny
+            if (dodajdoLigiSedzia != null) {
+                dodajdoLigiSedzia.setVisibility(View.VISIBLE);
+            }
         }
 
     }

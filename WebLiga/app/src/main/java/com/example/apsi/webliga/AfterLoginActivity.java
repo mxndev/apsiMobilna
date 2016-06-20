@@ -203,7 +203,8 @@ public class AfterLoginActivity extends AppCompatActivity {
     }
 
     public void wyloguj(final View view) {
-        startActivity(new Intent(AfterLoginActivity.this, MainActivity.class));
+        startActivity(new Intent(AfterLoginActivity.this, MainWindowActivity.class));
+        this.finish();
     }
 
     public void pobierzIdSedziego() {
