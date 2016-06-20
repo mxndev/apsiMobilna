@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SearchLeagueActivity" />
+        <activity android:name=".LeagueDetailsActivity" />
+        <activity android:name=".MyTeamsActivity" />
         <activity android:name=".GroupActivity" />
         <activity android:name=".RankingActivity" />
         <activity android:name=".TeamActivity" />

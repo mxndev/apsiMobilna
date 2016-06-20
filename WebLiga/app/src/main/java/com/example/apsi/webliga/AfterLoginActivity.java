@@ -65,6 +65,7 @@ public class AfterLoginActivity extends AppCompatActivity {
         arrayList1.add("Wyszukaj ligę");
         arrayList1.add("Wyszukaj zespół");
         arrayList1.add("Moje mecze");
+        arrayList1.add("Moje zespoły");
         // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, arrayList1);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, arrayList1) {
 
@@ -119,6 +120,11 @@ public class AfterLoginActivity extends AppCompatActivity {
                     case 4:
                         //przycisk do otwierania moich meczów
                         startActivity(new Intent(AfterLoginActivity.this, MojeMeczeActivity.class));
+                        spinner.setSelection(0);
+                        break;
+                    case 5:
+                        //przycisk do otwierania moich meczów
+                        startActivity(new Intent(AfterLoginActivity.this, MyTeamsActivity.class));
                         spinner.setSelection(0);
                         break;
                 }
