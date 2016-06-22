@@ -209,7 +209,11 @@ public class AfterLoginActivity extends AppCompatActivity {
     }
 
     public void wyloguj(final View view) {
-        startActivity(new Intent(AfterLoginActivity.this, MainWindowActivity.class));
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        globalActivity.setIsCapitan(null);
+        globalActivity.setIsOrganizer(null);
+        globalActivity.setIsPlayer(null);
+        globalActivity.setIsReferee(null);
         this.finish();
     }
 

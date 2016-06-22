@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ae3556d-74bb-4114-927c-d73067dc0c14" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebLiga/.idea/dictionaries/xx.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/WebLiga/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/WebLiga/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/WebLiga/.idea/modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/WebLiga/.idea/runConfigurations.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/.idea/compiler.xml" afterPath="$PROJECT_DIR$/WebLiga/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/.idea/encodings.xml" afterPath="$PROJECT_DIR$/WebLiga/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/.idea/gradle.xml" afterPath="$PROJECT_DIR$/WebLiga/.idea/gradle.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/.idea/misc.xml" afterPath="$PROJECT_DIR$/WebLiga/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/.idea/modules.xml" afterPath="$PROJECT_DIR$/WebLiga/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/WebLiga/.idea/runConfigurations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebLiga/build.gradle" afterPath="$PROJECT_DIR$/WebLiga/build.gradle" />
     </list>
     <ignored path="apsiMobilna.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +53,7 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/WebLiga/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4600246">
+            <state vertical-scroll-proportion="0.43037975">
               <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
               <folding />
             </state>
@@ -87,14 +85,15 @@
       <list>
         <option value="$PROJECT_DIR$/WebLiga/app/src/main/java/com/example/apsi/webliga/GroupActivity.java" />
         <option value="$PROJECT_DIR$/WebLiga/build.gradle" />
+        <option value="$PROJECT_DIR$/WebLiga/app/build.gradle" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="247" />
-    <option name="y" value="11" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -122,8 +121,9 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="AndroidView">
+        <subPane />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -248,9 +248,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane />
-      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -357,7 +356,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="247" y="11" width="1400" height="1000" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -372,7 +371,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25373134" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18123667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -469,6 +468,38 @@
     <entry file="file://$PROJECT_DIR$/WebLiga/app/src/main/java/com/example/apsi/webliga/GroupActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="30" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebLiga/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebLiga/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebLiga/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WebLiga/app/src/main/java/com/example/apsi/webliga/GroupActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -524,7 +555,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/WebLiga/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4600246">
+        <state vertical-scroll-proportion="0.43037975">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
           <folding />
         </state>

@@ -156,10 +156,10 @@ public class MainActivity extends AppCompatActivity  {
         if (editText2 != null) {
             userLogin = editText2.getText().toString().trim();
             new ExecuteLogin(localContext, userLogin, editText.getText().toString().trim()).execute();
+            this.finish();
         }
     }
     public void anuluj(final View view) {
-        //startActivity(new Intent(MainActivity.this, MainWindowActivity.class));
         this.finish();
     }
 }

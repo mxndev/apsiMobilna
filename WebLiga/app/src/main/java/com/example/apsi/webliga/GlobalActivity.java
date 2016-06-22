@@ -27,6 +27,10 @@ public class GlobalActivity extends Application {
     }
 
     public String getIsReferee(){
+        if(isReferee == null)
+        {
+            return null;
+        }
         return isReferee;
     }
     public void setIsReferee(String aisReferee){
@@ -34,6 +38,10 @@ public class GlobalActivity extends Application {
     }
 
     public String getIsCapitan(){
+        if(isCapitan == null)
+        {
+            return null;
+        }
         return isCapitan;
     }
     public void setIsCapitan(String aisCapitan){
@@ -41,6 +49,10 @@ public class GlobalActivity extends Application {
     }
 
     public String getIsPlayer(){
+        if(isPlayer == null)
+        {
+            return null;
+        }
         return isPlayer;
     }
     public void setIsPlayer(String aisPlayer){
@@ -48,6 +60,10 @@ public class GlobalActivity extends Application {
     }
 
     public String getIsOrganizer(){
+        if(isOrganizer == null)
+        {
+            return null;
+        }
         return isOrganizer;
     }
     public void setIsOrganizer(String aisOrganizer){

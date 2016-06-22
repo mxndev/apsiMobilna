@@ -11,13 +11,17 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONArray;
@@ -38,6 +43,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class LeagueDetailsActivity extends AppCompatActivity {
 
@@ -63,6 +69,333 @@ public class LeagueDetailsActivity extends AppCompatActivity {
             if (sedziowie != null) {
                 sedziowie.setVisibility(View.VISIBLE);
             }
+        }
+
+        if (globalActivity.getIsOrganizer() != null)
+        {
+            if (globalActivity.getIsOrganizer().equals("Y"))
+            {
+                final Button button1 = (Button) findViewById(R.id.button4);
+                button1.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    public void newMatch(View view) {
+        class GroupsExecute extends AsyncTask<Void, Void, String> {
+            private int leagueID;
+            ArrayAdapter<String> adapter;
+            HashMap<String, Integer> spinnerMap;
+            private final String urlToGetLeagueByName =
+                    "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/home/getGroupsByLeague?id=";
+
+            public GroupsExecute(int leagueID_, ArrayAdapter<String> adapter_, HashMap<String, Integer> spinnerMap_) {
+                leagueID = leagueID_;
+                adapter = adapter_;
+                spinnerMap = spinnerMap_;
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String ret;
+                try {
+                    HttpClient client = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(String.format("%s%d", urlToGetLeagueByName, leagueID));
+                    HttpResponse response = client.execute(request);
+                    BufferedReader rd = new BufferedReader(
+                            new InputStreamReader(response.getEntity().getContent()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = rd.readLine()) != null) {
+                        result.append(line);
+                    }
+                    ret = result.toString();
+                } catch (Exception e) {
+                    return e.toString();
+                }
+                return ret;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                JSONArray jsonArray;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    try {
+                        jsonArray = new JSONArray(result);
+                        adapter.clear();
+                        int i = 0;
+                        while (i < jsonArray.length()) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String name = jsonObject.getString("name");
+                            spinnerMap.put(jsonObject.getString("name"), jsonObject.getInt("id"));
+                            adapter.add(name);
+                            i++;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        class ParticipantsExecute extends AsyncTask<Void, Void, String> {
+            private int leagueID, groupId;
+            ArrayAdapter<String> adapter, adapter2;
+            private final String urlToGetLeagueByName =
+                    "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/home/getGroupsByLeague?id=";
+
+            public ParticipantsExecute(int leagueID_, int groupId_, ArrayAdapter<String> adapter_, ArrayAdapter<String> adapter2_) {
+                leagueID = leagueID_;
+                adapter = adapter_;
+                adapter2 = adapter2_;
+                groupId = groupId_;
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String ret;
+                try {
+                    HttpClient client = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(String.format("%s%d", urlToGetLeagueByName, leagueID));
+                    HttpResponse response = client.execute(request);
+                    BufferedReader rd = new BufferedReader(
+                            new InputStreamReader(response.getEntity().getContent()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = rd.readLine()) != null) {
+                        result.append(line);
+                    }
+                    ret = result.toString();
+                } catch (Exception e) {
+                    return e.toString();
+                }
+                return ret;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                JSONArray jsonArray;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    try {
+                        jsonArray = new JSONArray(result);
+                        adapter.clear();
+                        adapter2.clear();
+                        int i = 0;
+                        while (i < jsonArray.length()) {
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            if(groupId == jsonObject.getInt("id"))
+                            {
+                                JSONArray players = jsonObject.getJSONArray("players");
+                                int j = 0;
+                                while (j < players.length()) {
+                                    JSONObject jsonObject2 = players.getJSONObject(j);
+                                    String name = jsonObject2.getJSONObject("user").getString("name") + " " + jsonObject2.getJSONObject("user").getString("surname");
+                                    adapter.add(name);
+                                    adapter2.add(name);
+                                    ++j;
+                                }
+                                JSONArray teams = jsonObject.getJSONArray("teams");
+                                j = 0;
+                                while (j < teams.length()) {
+                                    JSONObject jsonObject2 = teams.getJSONObject(j);
+                                    String name = jsonObject2.getString("name");
+                                    adapter.add(name);
+                                    adapter2.add(name);
+                                    ++j;
+                                }
+                            }
+                            i++;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.create_match, null);
+        dialogBuilder.setView(dialogView);
+        RadioGroup rgGenderGroup= (RadioGroup) findViewById(R.id.radioSex);
+        final EditText date = (EditText) dialogView.findViewById(R.id.editText3);
+        final EditText time = (EditText) dialogView.findViewById(R.id.editText2);
+        final EditText miasto = (EditText) dialogView.findViewById(R.id.editText4);
+        final EditText adres = (EditText) dialogView.findViewById(R.id.editText5);
+        final EditText kod = (EditText) dialogView.findViewById(R.id.editText6);
+        final Spinner spinner = (Spinner) dialogView.findViewById(R.id.spinner);
+        final Spinner spinner2 = (Spinner) dialogView.findViewById(R.id.spinner2);
+        final Spinner spinner3 = (Spinner) dialogView.findViewById(R.id.spinner3);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        spinner.setAdapter(adapter);
+        spinner2.setAdapter(adapter2);
+        spinner3.setAdapter(adapter3);
+        final HashMap<String, Integer> spinnerMap = new HashMap<String, Integer>();
+        new GroupsExecute(leagueId, adapter, spinnerMap).execute();
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String name = spinner.getSelectedItem().toString();
+                new ParticipantsExecute(leagueId, spinnerMap.get(name), adapter2, adapter3).execute();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        dialogBuilder.setTitle("Tworzenie nowego meczu");
+        dialogBuilder.setMessage("Tutaj możesz dodać nowy mecz");
+        dialogBuilder.setPositiveButton("Stwórz", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String name = spinner.getSelectedItem().toString();
+                int id2 = spinnerMap.get(name);
+                String typ = "";
+                if(true)
+                {
+                    typ = "indoor";
+                } else {
+                    typ = "outdoor";
+                }
+                new HttpAsyncTask().execute(Integer.toString(leagueId), Integer.toString(id2), miasto.getText().toString(), adres.getText().toString().toString(), kod.getText().toString(), typ, date.getText().toString(), time.getText().toString(), spinner2.getSelectedItem().toString(), spinner3.getSelectedItem().toString(), "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/organizer/addMatchToGroup");
+            }
+        });
+        dialogBuilder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Toast.makeText(getBaseContext(), "Anulowano!", Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+    public String POST(int leagueID, int groupID, String miasto, String adres, String kod, String typ, String date, String time, String value1, String value2, String url){
+        String response = "";
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+
+            //pobranie ligi
+            HttpGet request = new HttpGet(String.format("%s%d", "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/home/getGroupsByLeague?id=", leagueID));
+            HttpResponse responseLeague = httpclient.execute(request);
+            BufferedReader rd = new BufferedReader(
+                    new InputStreamReader(responseLeague.getEntity().getContent()));
+            StringBuilder result = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            String league = result.toString();
+
+            JSONArray jsonArrayGroup = new JSONArray(league);
+            String groupJSON = "";
+            String leagueJSON = "";
+            int i = 0;
+            boolean isTeam = false;
+            JSONArray teams, players;
+            String pk1 = "", pk2 = "";
+            while (i < jsonArrayGroup.length()) {
+                JSONObject jsonObject = jsonArrayGroup.getJSONObject(i);
+                if(leagueJSON.equals(""))
+                {
+                    leagueJSON = jsonObject.getString("league");
+                }
+                if(jsonObject.getInt("id") == groupID)
+                {
+                    groupJSON = jsonObject.toString();
+                    teams = jsonObject.getJSONArray("teams");
+                    players = jsonObject.getJSONArray("players");
+                    if(teams.length() > 0)
+                    {
+                        isTeam = true;
+                    }
+                    int j = 0;
+                    if(!isTeam)
+                    {
+                        while (j < players.length()) {
+                            JSONObject jsonObject2 = players.getJSONObject(j);
+                            String name = jsonObject2.getJSONObject("user").getString("name") + " " + jsonObject2.getJSONObject("user").getString("surname");
+                            if(value1.equals(name))
+                            {
+                                pk1 = jsonObject2.toString();
+                            }
+                            if(value2.equals(name))
+                            {
+                                pk2 = jsonObject2.toString();
+                            }
+                            ++j;
+                        }
+                    } else {
+                        j = 0;
+                        while (j < teams.length()) {
+                            JSONObject jsonObject2 = teams.getJSONObject(j);
+                            String name = jsonObject2.getString("name");
+                            if(value1.equals(name))
+                            {
+                                pk1 = jsonObject2.toString();
+                            }
+                            if(value2.equals(name))
+                            {
+                                pk2 = jsonObject2.toString();
+                            }
+                            ++j;
+                        }
+                    }
+                }
+                ++i;
+            }
+
+            String scoreTeam = "";
+            String scoreInd = "";
+            if(isTeam)
+            {
+                scoreTeam = "[{\"score\":null,\"points\":null,\"pk\":"+ pk1.trim() +",\"payed\":\"payed\",\"scoreDetails\":[]},{\"score\":null,\"points\":null,\"pk\":"+ pk1.trim() +",\"payed\":\"payed\",\"scoreDetails\":[]}]";
+                scoreInd = "[]";
+            } else {
+                scoreTeam = "[]";
+                scoreInd = "[{\"score\":null,\"points\":null,\"pk\":"+ pk1.trim() +",\"payed\":\"payed\",\"scoreDetails\":[]},{\"score\":null,\"points\":null,\"pk\":"+ pk2.trim() +",\"payed\":\"payed\",\"scoreDetails\":[]}]";
+            }
+
+            String place = "{\"id\":null,\"city\":\""+ miasto.trim() +"\",\"postalCode\":\""+ kod.trim() +"\",\"address\":\""+ adres.trim() +"\",\"placeType\":\""+ typ.trim() +"\"}";
+            HttpPost httpPost = new HttpPost(url);
+
+            String json = "{\"id\":null,\"league\":"+ leagueJSON.trim() +",\"referee\":null,\"place\":"+ place.trim() +",\"date\":\""+ date.trim() +"\",\"time\":\""+ time.trim() +"\",\"group\":"+ groupJSON.trim() +",\"scoreInd\":"+ scoreInd.trim() +",\"scoreTeam\":"+ scoreTeam.trim() + "}";
+            StringEntity se = new StringEntity(json);
+            httpPost.setEntity(se);
+            httpPost.setHeader("Content-type", "application/json");
+
+            final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+            final HttpContext localContext = globalActivity.getLocalContext();
+            HttpResponse httpResponse = httpclient.execute(httpPost, localContext);
+
+            if((httpResponse.getStatusLine().getStatusCode() == 200) || ((httpResponse.getStatusLine().getStatusCode() == 400)))
+                response = "OK";
+            else
+                response = "Error";
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+
+        // 11. return result
+        return response;
+    }
+
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls)
+        {
+            return POST(Integer.parseInt(urls[0]), Integer.parseInt(urls[1]), urls[2], urls[3], urls[4], urls[5], urls[6], urls[7], urls[8], urls[9], urls[10]);
+        }
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            if(result.equals("OK" ))
+                Toast.makeText(getBaseContext(), "Mecz został utworzony!", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(getBaseContext(), "Nie udało się utworzyć meczu!", Toast.LENGTH_LONG).show();
         }
     }
 
