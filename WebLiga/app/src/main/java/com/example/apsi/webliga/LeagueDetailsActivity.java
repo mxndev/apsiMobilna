@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,15 @@ public class LeagueDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_league_details);
         initLeagueInfo();
+
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        if (globalActivity.getIsOrganizer() != null && globalActivity.getIsOrganizer().equals("Y")) {
+            Button sedziowie = (Button) findViewById(R.id.sedziowieButton);
+            //przycisk od sedziego staje sie widoczny
+            if (sedziowie != null) {
+                sedziowie.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void initLeagueInfo() {
@@ -134,6 +144,22 @@ public class LeagueDetailsActivity extends AppCompatActivity {
             }
         }
         new SignIndToLeagueExecute(leagueId).execute();
+    }
+
+    public void sedziowie(final View view) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.accept_referee, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle("Sedziowie ligi");
+        dialogBuilder.setNegativeButton("Powrot", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //Toast.makeText(getBaseContext(), "Anulowano!", Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
     }
 
     class ChooseTeamDialogFragment extends DialogFragment {
