@@ -10,6 +10,7 @@ public class GlobalActivity extends Application {
     private String userLogin,isReferee,isCapitan,isPlayer,isOrganizer;
     private int userID;
     private int refereeID;
+    private String leagueName;
 
     public HttpContext getLocalContext(){
         return localContext;
@@ -66,5 +67,15 @@ public class GlobalActivity extends Application {
     public int getRefereeID() {
         return refereeID;
     }
+
+
+    public String getLeagueName() {
+        return leagueName;
+    }
+
+    public void setLeagueName(String leagueName) {
+        this.leagueName = leagueName;
+    }
+
 
 }

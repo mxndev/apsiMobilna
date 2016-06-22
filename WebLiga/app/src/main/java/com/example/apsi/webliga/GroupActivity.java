@@ -1,18 +1,23 @@
 package com.example.apsi.webliga;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +28,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HttpContext;
@@ -40,6 +46,8 @@ public class GroupActivity extends AppCompatActivity {
     private ArrayList<GroupListElement> groupListElements;
     ArrayList<Integer> leaguesReferee = new ArrayList<>();
     int groupId;
+    JSONArray jsonArray;
+    String league = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +144,60 @@ public class GroupActivity extends AppCompatActivity {
             }
         }
 
+        if (globalActivity.getIsOrganizer() != null && globalActivity.getIsOrganizer().equals("Y")) {
+            Button dodajGrupe = (Button) findViewById(R.id.dodajGrupa);
+            if (dodajGrupe != null) {
+                dodajGrupe.setVisibility(View.VISIBLE);
+            }
+        }
+
+        class SearchLeagueExecute extends AsyncTask<Void, Void, String> {
+            private String leagueName;
+            private final String urlToGetLeagueByName =
+                    "http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/home/getLeaguesByName?name=";
+
+            public SearchLeagueExecute(String leagueName_) {
+                leagueName = leagueName_;
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                String ret;
+                try {
+                    HttpClient client = new DefaultHttpClient();
+                    HttpGet request = new HttpGet(urlToGetLeagueByName + leagueName);
+                    HttpResponse response = client.execute(request);
+                    BufferedReader rd = new BufferedReader(
+                            new InputStreamReader(response.getEntity().getContent()));
+                    StringBuilder result = new StringBuilder();
+                    String line;
+                    while ((line = rd.readLine()) != null) {
+                        result.append(line);
+                    }
+                    ret = result.toString();
+                } catch (Exception e) {
+                    return e.toString();
+                }
+                return ret;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                    try {
+                        jsonArray = new JSONArray(result);
+                        league = result;
+                        league = league.substring(1,league.length()-1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        String notReady = globalActivity.getLeagueName().trim();
+        String ready = notReady.replaceAll(" ", "%20");
+        new SearchLeagueExecute(ready.trim()).execute();
     }
 
     public void pobranieLigSedziego() {
@@ -227,12 +289,13 @@ public class GroupActivity extends AppCompatActivity {
                     ArrayList<NameValuePair> pairs = new ArrayList<>();
                     pairs.add(new BasicNameValuePair("leagueId", Integer.toString(leagueID)));
                     request.setEntity(new UrlEncodedFormEntity(pairs));
-                    HttpResponse response = client.execute(request,localContext);
+                    HttpResponse response = client.execute(request, localContext);
                     BufferedReader rd = new BufferedReader(
                             new InputStreamReader(response.getEntity().getContent()));
                     StringBuilder result = new StringBuilder();
                     String line;
-                    while ((line = rd.readLine()) != null) {result.append(line);
+                    while ((line = rd.readLine()) != null) {
+                        result.append(line);
                     }
                     ret = result.toString();
                 } catch (Exception e) {
@@ -243,17 +306,89 @@ public class GroupActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(String result) {
-                if (result.equals("{\"description\":\"Pomyślnie zapisano wniosek o przypisanie sędziego do ligi. \",\"status\":\"OK\"}")){
+                if (result.equals("{\"description\":\"Pomyślnie zapisano wniosek o przypisanie sędziego do ligi. \",\"status\":\"OK\"}")) {
                     Toast.makeText(getBaseContext(), "Dodano sędziego!", Toast.LENGTH_LONG).show();
                     Button dodajdoLigiSedzia = (Button) findViewById(R.id.dodajdoLigiSedzia);
                     dodajdoLigiSedzia.setVisibility(View.INVISIBLE);
-                }
-                else
+                } else
                     Toast.makeText(getBaseContext(), "Nie udalo się dodać sędziego!", Toast.LENGTH_LONG).show();
             }
         }
 
         new signToLeagueReferee(groupId).execute();
+    }
+
+    public void DodajGrupe(final View view) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.create_group, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editName = (EditText) dialogView.findViewById(R.id.editName);
+        final EditText editPlayerNumber = (EditText) dialogView.findViewById(R.id.editPlayerNumber);
+        final EditText editPromotion = (EditText) dialogView.findViewById(R.id.editPromotion);
+
+        dialogBuilder.setTitle("Dodaj grupę");
+        dialogBuilder.setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                new HttpAsyncTask().execute("http://multiliga-mrzeszotarski.rhcloud.com/multiliga/api/organizer/createGroup", editName.getText().toString()
+                , editPlayerNumber.getText().toString(), editPromotion.getText().toString());
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        dialogBuilder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                Toast.makeText(getBaseContext(), "Anulowano!", Toast.LENGTH_LONG).show();
+            }
+        });
+        AlertDialog b = dialogBuilder.create();
+        b.show();
+    }
+
+    public String POST(String url, String name, String playerNumber, String Promotion) {
+        String response = "";
+        try {
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+
+            String json = "{\"id\":null,\"name\":\"" + name.trim() + "\",\"league\":" + league + ",\"matchesNo\":5,\"teamsPlayersNo\":" +
+                    playerNumber + ",\"promotionsNo\":" + Promotion + ",\"phase\":\"group\"" + "}";
+            StringEntity se = new StringEntity(json);
+            httpPost.setEntity(se);
+            httpPost.setHeader("Content-type", "application/json");
+
+            final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+            final HttpContext localContext = globalActivity.getLocalContext();
+            HttpResponse httpResponse = httpclient.execute(httpPost, localContext);
+
+            if (httpResponse.getStatusLine().getStatusCode() == 200)
+                response = "OK";
+            else
+                response = "Error";
+
+        } catch (Exception e) {
+            Log.d("InputStream", e.getLocalizedMessage());
+        }
+
+        // 11. return result
+        return response;
+    }
+
+    private class HttpAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            return POST(urls[0], urls[1], urls[2], urls[3]);
+        }
+
+        // onPostExecute displays the results of the AsyncTask.
+        @Override
+        protected void onPostExecute(String result) {
+            if (result.equals("OK"))
+                Toast.makeText(getBaseContext(), "Grupa została utworzona!", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(getBaseContext(), "Nie udało się utworzyć grupy!", Toast.LENGTH_LONG).show();
+        }
     }
 }
 

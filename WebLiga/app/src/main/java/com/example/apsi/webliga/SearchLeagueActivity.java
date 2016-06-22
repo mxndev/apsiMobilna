@@ -120,8 +120,7 @@ public class SearchLeagueActivity extends AppCompatActivity {
             protected void onPostExecute(String result){
                 JSONArray jsonArray;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                    try {
-                        jsonArray = new JSONArray(result);
+                    try {jsonArray = new JSONArray(result);
                         searchLeagueListElements = parseJSONArray(jsonArray);
                         searchLeagueAdapter = new SearchLeagueAdapter(SearchLeagueActivity.this, 0, searchLeagueListElements);
                         listView.setAdapter(searchLeagueAdapter);

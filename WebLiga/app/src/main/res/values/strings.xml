@@ -33,4 +33,6 @@
     <string name="title_activity_change_results">ChangeResultsActivity</string>
     <string name="changeResultsTitle">Wprowadź wynik</string>
     <string name="title_activity_team_details">TeamDetailsActivity</string>
+    <string name="wpisz_nazw_grupy">Wpisz nazwę grupy:</string>
+    <string name="liczba_uczestnikow">Liczba uczestników:</string>
 </resources>

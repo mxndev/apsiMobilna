@@ -66,12 +66,14 @@ public class LeagueDetailsActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.organizerTV);
         textView.setText(temp);
         temp = intent.getStringExtra("name");
+        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+        globalActivity.setLeagueName(temp);
         textView = (TextView) findViewById(R.id.leagueNameTV);
         textView.setText(temp);
         leagueId = intent.getIntExtra("ID", 0);
         Button signIndToLeagueBtn = (Button) findViewById(R.id.signIndToLeagueBtn);
         Button signTeamToLeagueBtn = (Button) findViewById(R.id.signTeamToLeagueBtn);
-        final GlobalActivity globalActivity = (GlobalActivity) getApplicationContext();
+
         if (globalActivity.getLocalContext() != null)
             if (intent.getStringExtra("sportsType").equals(INDIVIDUAL_SPORT))
                 signIndToLeagueBtn.setVisibility(Button.VISIBLE);

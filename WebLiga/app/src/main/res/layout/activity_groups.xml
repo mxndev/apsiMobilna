@@ -51,4 +51,14 @@
         android:visibility="invisible"
         android:onClick="dodajdoLigiSedzia"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodaj grupę"
+        android:id="@+id/dodajGrupa"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
+        android:onClick="DodajGrupe"/>
+
 </RelativeLayout>
