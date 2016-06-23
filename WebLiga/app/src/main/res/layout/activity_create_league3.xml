@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.apsi.webliga.CreateLeagueActivity">
+
+    <TextView
+        android:id="@+id/enterNewLeagueDataTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Wprowadź dane nowej ligi"
+        android:layout_marginBottom="15dp"
+        android:textSize="26dp"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Za mecz"
+        android:shadowColor="@android:color/holo_green_light"
+        android:id="@+id/pointsForMatchOptionBtn"
+        android:layout_below="@+id/enterNewLeagueDataTV"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:onClick="switchLayoutToPointsForMatchOption"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Za miejsce"
+        android:id="@+id/pointsForPlaceOptionBtn"
+        android:layout_below="@+id/enterNewLeagueDataTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:onClick="switchLayoutToPointsForPlaceOption"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Tryb standardowy"
+        android:shadowColor="@android:color/holo_green_light"
+        android:id="@+id/pointsForMatchOptionStandardBtn"
+        android:layout_below="@+id/pointsForMatchOptionBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:onClick="switchLayoutToPointsForMatchStandardOption"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Tryb zaawansowany"
+        android:id="@+id/pointsForPlaceOptionAdvancedBtn"
+        android:layout_below="@+id/pointsForPlaceOptionBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:onClick="switchLayoutToPointsForPlaceOption"/>
+
+    <TextView
+        android:id="@+id/clueTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/pointsForMatchOptionStandardBtn"
+        android:text="Określ ile punktów uczestnik otrzyma za zwycięstwo, przegraną lub remis."
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/pointForWinTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/clueTV"
+        android:text="Punkty za zwycięstwo:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="3"
+        android:maxEms="3"
+        android:id="@+id/pointForWinET"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@id/pointForWinTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/pointForDrawTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/pointForWinTV"
+        android:text="Punkty za remis:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="3"
+        android:maxEms="3"
+        android:id="@+id/pointForDrawET"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@id/pointForDrawTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/pointForLoseTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/pointForDrawTV"
+        android:text="Punkty za porażkę:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="3"
+        android:maxEms="3"
+        android:id="@+id/pointForLoseET"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@id/pointForLoseTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Utwórz"
+        android:id="@+id/createNewLeague"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="createNewLeague"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wstecz"
+        android:id="@+id/BackNewLeagueBtn3"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/createNewLeague"
+        android:onClick="backFormCreateLeagueActivity3"/>
+</RelativeLayout>

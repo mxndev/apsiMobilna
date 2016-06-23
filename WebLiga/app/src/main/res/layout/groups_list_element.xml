@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/matchesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Liczba meczy:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/matchesLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="mecz"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/teamPlayersLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/matchesLabel"
+        android:text="Liczba graczy w zespole:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/teamPlayersLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/matchesLabelTV"
+        android:text="players"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/promotionsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/teamPlayersLabel"
+        android:text="Liczba awansujących drużyn:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/promotionsLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/teamPlayersLabelTV"
+        android:text="teams"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/phaseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/promotionsLabel"
+        android:text="Faza:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/phaseLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/promotionsLabelTV"
+        android:text="phase"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+</RelativeLayout>

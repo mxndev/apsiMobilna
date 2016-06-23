@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/dateMPLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Data:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/dateMP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="leaguename"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/resultMPLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/dateMPLabel"
+        android:text="Wynik:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/resultMP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/dateMP"
+        android:text="sportname"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+</RelativeLayout>

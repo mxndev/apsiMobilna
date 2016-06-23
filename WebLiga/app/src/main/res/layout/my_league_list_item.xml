@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/myLeagueNameLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Nazwa ligi:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/myLeagueNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="leaguename"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/mySportNameLabelTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/myLeagueNameLabelTV"
+        android:text="Dyscyplina:"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <TextView
+        android:id="@+id/mySportNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/myLeagueNameTV"
+        android:text="sportname"
+        android:textSize="@dimen/search_league_list_element_text_size"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Usuń ligę"
+        android:id="@+id/deleleLeague"
+        android:layout_below="@+id/mySportNameLabelTV"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:onClick="deleteLeague"/>
+
+
+</RelativeLayout>

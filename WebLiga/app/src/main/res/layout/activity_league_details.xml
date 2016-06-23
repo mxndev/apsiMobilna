@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.apsi.webliga.LeagueDetailsActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Nazwa ligi:"
+        android:id="@+id/leagueNameLblTV"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="league name"
+        android:id="@+id/leagueNameTV"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/leagueNameLblTV"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Dyscyplina:"
+        android:id="@+id/disciplineLblTV"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/leagueNameLblTV"
+        android:layout_marginTop="10dp"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="discipline"
+        android:id="@+id/disciplineTV"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/leagueNameTV"
+        android:layout_toRightOf="@+id/disciplineLblTV"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Organizator:"
+        android:id="@+id/organizerLblTV"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/disciplineLblTV"
+        android:layout_marginTop="10dp"
+        android:textSize="22dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="organizer"
+        android:id="@+id/organizerTV"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/organizerLblTV"
+        android:layout_below="@+id/disciplineTV"
+        android:textSize="22dp"/>
+
+    <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Zobacz ranking"
+    android:id="@+id/showRankingBtn"
+    android:layout_below="@+id/organizerLblTV"
+    android:layout_marginTop="10dp"
+    android:onClick="showLeagueRanking" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zapisz się do ligi"
+        android:id="@+id/signIndToLeagueBtn"
+        android:layout_below="@+id/organizerLblTV"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:layout_toRightOf="@+id/showRankingBtn"
+        android:onClick="signIndToLeague" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zapisz zespół do ligi"
+        android:id="@+id/signTeamToLeagueBtn"
+        android:layout_below="@+id/organizerLblTV"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        android:layout_toRightOf="@+id/showRankingBtn"
+        android:onClick="signTeamToLeagueBtn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Najbliższe mecze:"
+        android:id="@+id/nextMatchesTV"
+        android:textSize="22dp"
+        android:layout_below="@+id/sedziowieButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leagueMatchesList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/nextMatchesTV" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Ostatnie mecze:"
+        android:id="@+id/previousMatchesTV"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/leagueMatchesList"
+        android:layout_marginTop="10dp"
+        android:textSize="22dp"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/previousLeagueMatchesList"
+        android:layout_below="@+id/previousMatchesTV"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/button4"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sędziowie"
+        android:id="@+id/sedziowieButton"
+        android:layout_below="@+id/showRankingBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"
+        android:onClick="sedziowie"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nowy mecz"
+        android:id="@+id/button4"
+        android:visibility="invisible"
+        android:onClick="newMatch"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

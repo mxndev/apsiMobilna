@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.apsi.webliga.CreateLeagueActivity">
+
+    <TextView
+        android:id="@+id/enterNewLeagueDataTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Wprowadź dane nowej ligi"
+        android:layout_marginBottom="15dp"
+        android:textSize="26dp"/>
+
+    <TextView
+        android:id="@+id/enterNewLeagueSeasonTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enterNewLeagueDataTV"
+        android:text="Sezon:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="8"
+        android:maxEms="8"
+        android:id="@+id/enterNewLeagueSeasonET"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:text="1"
+        android:layout_alignBaseline="@id/enterNewLeagueSeasonTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/enterNewLeagueYearTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enterNewLeagueSeasonTV"
+        android:text="Rok:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="8"
+        android:maxEms="8"
+        android:id="@+id/enterNeLeagueYearET"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:text="2016"
+        android:layout_alignBaseline="@id/enterNewLeagueYearTV"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/leagueTypeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/enterNewLeagueYearTV"
+        android:text="Typ ligi:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/leagueTypeRG"
+        android:layout_below="@+id/enterNewLeagueYearTV"
+        android:layout_toRightOf="@+id/leagueTypeTV"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Liga &quot;każdy z każdym&quot;"
+            android:id="@+id/allTypeRB" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turniej"
+            android:id="@+id/tournamentTypeRB"
+            android:checked="true"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turniej z fazą grupową"
+            android:id="@+id/tournamentWithGroupTypeRB" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/matchEntranceTypeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/leagueTypeRG"
+        android:text="Wstęp na mecze:"
+        android:layout_marginBottom="15dp"
+        android:textSize="18dp"/>
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/matchEntranceRG"
+        android:layout_below="@+id/leagueTypeRG"
+        android:layout_toRightOf="@+id/matchEntranceTypeTV"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wolny"
+            android:id="@+id/freeRB"
+            android:checked="true"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Płatny"
+            android:id="@+id/nonfreeRB" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/matchesInGroupCountTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/matchEntranceRG"
+        android:text="Liczba meczy w grupie"
+        android:layout_marginBottom="8dp"
+        android:textSize="18dp"
+       />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/matchesInGroupCountET"
+        android:layout_below="@+id/matchesInGroupCountTV"
+        android:inputType="text"
+        android:ems="3"
+        android:maxEms="3"
+        android:singleLine="true"
+        android:textSize="18dp"
+        android:text="5"
+        android:layout_alignBaseline="@id/matchesInGroupCountTV"
+        android:layout_alignParentRight="true" />
+
+    <TextView
+        android:id="@+id/leagueDescriptionTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/matchesInGroupCountTV"
+        android:text="Opis ligi:"
+        android:layout_marginBottom="8dp"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leagueDescriptionET"
+        android:layout_below="@+id/leagueDescriptionTV"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLength="2000"
+        android:ems="16"
+        android:maxLines="4"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dalej"
+        android:id="@+id/NextNewLeagueBtn2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="nextFormCreateLeagueActivity2"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wstecz"
+        android:id="@+id/BackNewLeagueBtn2"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/NextNewLeagueBtn2"
+        android:onClick="backFormCreateLeagueActivity2"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anuluj"
+        android:id="@+id/cancelNewLeagueBtn2"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/BackNewLeagueBtn2"
+        android:onClick="backToMyLeaguesActivity"/>
+
+</RelativeLayout>

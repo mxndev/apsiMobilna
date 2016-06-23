@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:titleTextColor="#ffffff"
+        app:contentInsetLeft="100dp"
+        app:contentInsetStart="100dp">
+
+    </android.support.v7.widget.Toolbar>
+
+    <Button
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wylogujToolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/wylogujToolbar"
+        android:textColor="@color/abc_input_method_navigation_guard"
+        android:onClick="wyloguj"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/mojeMeczeTitle"
+        android:id="@+id/MojeMecze"
+        android:textSize="@dimen/abc_action_bar_stacked_max_height"
+        android:layout_below="@+id/spinnerToolbar2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sędziaMojeMecze"
+        android:id="@+id/buttonSedzia"
+        android:layout_marginTop="55dp"
+        android:layout_below="@+id/MojeMecze"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/buttonKapitan"
+        android:layout_toStartOf="@+id/buttonKapitan"
+        android:enabled="false"
+        android:onClick="sedzia"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kapitanMojeMecze"
+        android:id="@+id/buttonKapitan"
+        android:layout_alignTop="@+id/buttonSedzia"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:enabled="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/graczMojeMecze"
+        android:id="@+id/buttonGracz"
+        android:layout_alignTop="@+id/buttonOrganizator"
+        android:layout_alignRight="@+id/buttonKapitan"
+        android:layout_alignEnd="@+id/buttonKapitan"
+        android:layout_toRightOf="@+id/buttonOrganizator"
+        android:layout_toEndOf="@+id/buttonOrganizator"
+        android:enabled="false"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/orgarnizatorMojeMecze"
+        android:id="@+id/buttonOrganizator"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/buttonKapitan"
+        android:enabled="false"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerToolbar2"
+        android:layout_marginTop="5dp"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listaMeczySedzia"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/buttonSedzia"
+        android:visibility="invisible"/>
+</RelativeLayout>
